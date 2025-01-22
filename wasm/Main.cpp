@@ -3,10 +3,10 @@
 #include <memory>
 #include <elem/Runtime.h>
 
-#include "Convolve.h"
-#include "FFT.h"
-#include "Metro.h"
-#include "SampleTime.h"
+// #include "Convolve.h"
+// #include "FFT.h"
+// #include "Metro.h"
+// #include "SampleTime.h"
 
 
 using namespace emscripten;
@@ -44,21 +44,22 @@ public:
         runtime = std::make_unique<elem::Runtime<double>>(sampleRate, maxBlockSize);
 
         // Register extension nodes
-        runtime->registerNodeType("convolve", [](elem::NodeId const id, double fs, int const bs) {
-            return std::make_shared<elem::ConvolutionNode<double>>(id, fs, bs);
-        });
+        // runtime->registerNodeType("convolve", [](elem::NodeId const id, double fs, int const bs) {
+        //     return std::make_shared<elem::ConvolutionNode<double>>(id, fs, bs);
+        // });
 
-        runtime->registerNodeType("fft", [](elem::NodeId const id, double fs, int const bs) {
-            return std::make_shared<elem::FFTNode<double>>(id, fs, bs);
-        });
+        // Comment out FFT registration since we removed FFT.h
+        // runtime->registerNodeType("fft", [](elem::NodeId const id, double fs, int const bs) {
+        //     return std::make_shared<elem::FFTNode<double>>(id, fs, bs);
+        // });
 
-        runtime->registerNodeType("metro", [](elem::NodeId const id, double fs, int const bs) {
-            return std::make_shared<elem::MetronomeNode<double>>(id, fs, bs);
-        });
+        // runtime->registerNodeType("metro", [](elem::NodeId const id, double fs, int const bs) {
+        //     return std::make_shared<elem::MetronomeNode<double>>(id, fs, bs);
+        // });
 
-        runtime->registerNodeType("time", [](elem::NodeId const id, double fs, int const bs) {
-            return std::make_shared<elem::SampleTimeNode<double>>(id, fs, bs);
-        });
+        // runtime->registerNodeType("time", [](elem::NodeId const id, double fs, int const bs) {
+        //     return std::make_shared<elem::SampleTimeNode<double>>(id, fs, bs);
+        // });
     }
 
     //==============================================================================

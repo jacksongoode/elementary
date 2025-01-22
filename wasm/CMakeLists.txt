@@ -5,14 +5,14 @@ set(TargetName elementary-wasm)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_executable(${TargetName}
-  Main.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/TwoStageFFTConvolver.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/FFTConvolver.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/AudioFFT.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/Utilities.cpp)
+  Main.cpp)
+  # ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/TwoStageFFTConvolver.cpp
+  # ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/FFTConvolver.cpp
+  # ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/AudioFFT.cpp
+  # ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver/Utilities.cpp)
 
-target_include_directories(${TargetName} PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver)
+# target_include_directories(${TargetName} PRIVATE
+#   ${CMAKE_CURRENT_SOURCE_DIR}/FFTConvolver)
 
 target_compile_features(${TargetName} PRIVATE
   cxx_std_17)
