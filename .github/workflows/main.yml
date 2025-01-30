@@ -70,7 +70,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           # Discard changes to built WASM files
-          git checkout -- js/packages/*/elementary-wasm.*
+          git checkout -- js/packages/offline-renderer/elementary-wasm.cjs
+          git checkout -- js/packages/web-renderer/raw/elementary-wasm.js
 
           lerna publish from-package --yes --dist-tag next
 
