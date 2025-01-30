@@ -65,7 +65,7 @@ jobs:
       - name: Publish
         shell: bash
         working-directory: ./js
-        if: ${{ github.ref_type == 'branch' && github.ref_name == 'develop' }}
+        if: ${{ github.ref_type == 'branch' && github.ref_name == 'jackson.gd' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
