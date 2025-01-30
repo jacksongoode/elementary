@@ -30,6 +30,7 @@
   "scripts": {
     "wasm": "./scripts/prebuild.sh",
     "build": "tsup index.ts --format cjs,esm --dts",
+    "prepare": "npm run wasm && npm run build",
     "snaps": "jest --updateSnapshot",
     "test": "jest"
   },
