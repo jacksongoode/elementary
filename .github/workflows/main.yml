@@ -69,6 +69,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          # Discard changes to built WASM files
+          git checkout -- js/packages/*/elementary-wasm.*
+
           lerna publish from-package --yes --dist-tag next
 
       - name: Tag Latest
