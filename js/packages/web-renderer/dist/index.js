@@ -188,3 +188,4 @@ var WebRenderer = class extends EventEmitter {
 export {
   WebRenderer as default
 };
+//# sourceMappingURL=index.js.map
