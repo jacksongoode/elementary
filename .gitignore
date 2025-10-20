@@ -1,14 +1,24 @@
 build
 node_modules
+dist/
+js/dist/
+js/**/dist/
+js/package-lock.json
 
+# Editor / OS files
 .merlin
 .cljs_node_repl
 .cpcache
 .cache
 .DS_Store
-
 *.swp
 
+# Generated JS from ReScript
 js/**/lib/bs
+js/**/*.bs.js
+js/**/*.gen.ts
+js/**/*.cjs
+
+# Binaries
 js/packages/**/binaries/
 js/packages/**/*.min.js
