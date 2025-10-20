@@ -1,7 +1,12 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "prepare": "npx lerna run build"
+  },
   "devDependencies": {
-    "lerna": "^6.6.0"
+    "lerna": "^6.6.0",
+    "rescript": "^11.1.4",
+    "tsup": "^8.5.0"
   }
 }

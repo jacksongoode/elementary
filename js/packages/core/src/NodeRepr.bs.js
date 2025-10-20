@@ -22,14 +22,14 @@ function create(kind, props, children) {
 
 function isNode(a) {
   var match = Js_types.classify(a);
-  if (typeof match === "number") {
+  if (typeof match !== "object") {
     return false;
   }
-  if (match.TAG !== /* JSObject */3) {
+  if (match.TAG !== "JSObject") {
     return false;
   }
   var s = Js_types.classify(a.symbol);
-  if (typeof s === "number" || s.TAG !== /* JSString */1) {
+  if (typeof s !== "object" || s.TAG !== "JSString") {
     return false;
   } else {
     return s._0 === symbol;

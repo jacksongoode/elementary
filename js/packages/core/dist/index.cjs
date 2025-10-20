@@ -45,12 +45,19 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
-var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__getProtoOf(mod2)) : {}, __copyProps(isNodeMode || !mod2 || !mod2.__esModule ? __defProp(target, "default", { value: mod2, enumerable: true }) : target, mod2));
+var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__getProtoOf(mod2)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod2 || !mod2.__esModule ? __defProp(target, "default", { value: mod2, enumerable: true }) : target,
+  mod2
+));
 var __toCommonJS = (mod2) => __copyProps(__defProp({}, "__esModule", { value: true }), mod2);
 
 // index.ts
-var core_exports2 = {};
-__export(core_exports2, {
+var index_exports = {};
+__export(index_exports, {
   Delegate: () => Delegate,
   EventEmitter: () => Events_default,
   Renderer: () => Renderer,
@@ -62,31 +69,77 @@ __export(core_exports2, {
   stdlib: () => stdlib,
   unpack: () => unpack
 });
-module.exports = __toCommonJS(core_exports2);
+module.exports = __toCommonJS(index_exports);
 
-// node_modules/rescript/lib/es6/curry.js
-var curry_exports = {};
-__export(curry_exports, {
-  _1: () => _1,
-  _2: () => _2,
-  _3: () => _3,
-  _4: () => _4,
-  _5: () => _5,
-  _6: () => _6,
-  _7: () => _7,
-  _8: () => _8,
-  __1: () => __1,
-  __2: () => __2,
-  __3: () => __3,
-  __4: () => __4,
-  __5: () => __5,
-  __6: () => __6,
-  __7: () => __7,
-  __8: () => __8,
-  app: () => app
-});
+// ../../node_modules/rescript/lib/es6/js_types.js
+function classify(x) {
+  var ty = typeof x;
+  if (ty === "undefined") {
+    return "JSUndefined";
+  } else if (x === null) {
+    return "JSNull";
+  } else if (ty === "number") {
+    return {
+      TAG: "JSNumber",
+      _0: x
+    };
+  } else if (ty === "bigint") {
+    return {
+      TAG: "JSBigInt",
+      _0: x
+    };
+  } else if (ty === "string") {
+    return {
+      TAG: "JSString",
+      _0: x
+    };
+  } else if (ty === "boolean") {
+    if (x === true) {
+      return "JSTrue";
+    } else {
+      return "JSFalse";
+    }
+  } else if (ty === "symbol") {
+    return {
+      TAG: "JSSymbol",
+      _0: x
+    };
+  } else if (ty === "function") {
+    return {
+      TAG: "JSFunction",
+      _0: x
+    };
+  } else {
+    return {
+      TAG: "JSObject",
+      _0: x
+    };
+  }
+}
+function test(x, v) {
+  switch (v) {
+    case "Undefined":
+      return typeof x === "undefined";
+    case "Null":
+      return x === null;
+    case "Boolean":
+      return typeof x === "boolean";
+    case "Number":
+      return typeof x === "number";
+    case "String":
+      return typeof x === "string";
+    case "Function":
+      return typeof x === "function";
+    case "Object":
+      return typeof x === "object";
+    case "Symbol":
+      return typeof x === "symbol";
+    case "BigInt":
+      return typeof x === "bigint";
+  }
+}
 
-// node_modules/rescript/lib/es6/caml_array.js
+// ../../node_modules/rescript/lib/es6/caml_array.js
 function sub(x, offset, len) {
   var result = new Array(len);
   var j = 0;
@@ -100,7 +153,7 @@ function sub(x, offset, len) {
   return result;
 }
 
-// node_modules/rescript/lib/es6/curry.js
+// ../../node_modules/rescript/lib/es6/curry.js
 function app(_f, _args) {
   while (true) {
     var args = _args;
@@ -113,11 +166,11 @@ function app(_f, _args) {
       return f.apply(null, args);
     }
     if (d >= 0) {
-      return function(f2, args2) {
+      return /* @__PURE__ */ (function(f2, args2) {
         return function(x) {
           return app(f2, args2.concat([x]));
         };
-      }(f, args);
+      })(f, args);
     }
     _args = sub(args, arity, -d | 0);
     _f = f.apply(null, sub(args, 0, arity));
@@ -220,463 +273,8 @@ function __2(o) {
     };
   }
 }
-function _3(o, a0, a1, a2) {
-  var arity = o.length;
-  if (arity === 3) {
-    return o(a0, a1, a2);
-  } else {
-    switch (arity) {
-      case 1:
-        return app(o(a0), [
-          a1,
-          a2
-        ]);
-      case 2:
-        return app(o(a0, a1), [a2]);
-      case 3:
-        return o(a0, a1, a2);
-      case 4:
-        return function(param) {
-          return o(a0, a1, a2, param);
-        };
-      case 5:
-        return function(param, param$1) {
-          return o(a0, a1, a2, param, param$1);
-        };
-      case 6:
-        return function(param, param$1, param$2) {
-          return o(a0, a1, a2, param, param$1, param$2);
-        };
-      case 7:
-        return function(param, param$1, param$2, param$3) {
-          return o(a0, a1, a2, param, param$1, param$2, param$3);
-        };
-      default:
-        return app(o, [
-          a0,
-          a1,
-          a2
-        ]);
-    }
-  }
-}
-function __3(o) {
-  var arity = o.length;
-  if (arity === 3) {
-    return o;
-  } else {
-    return function(a0, a1, a2) {
-      return _3(o, a0, a1, a2);
-    };
-  }
-}
-function _4(o, a0, a1, a2, a3) {
-  var arity = o.length;
-  if (arity === 4) {
-    return o(a0, a1, a2, a3);
-  } else {
-    switch (arity) {
-      case 1:
-        return app(o(a0), [
-          a1,
-          a2,
-          a3
-        ]);
-      case 2:
-        return app(o(a0, a1), [
-          a2,
-          a3
-        ]);
-      case 3:
-        return app(o(a0, a1, a2), [a3]);
-      case 4:
-        return o(a0, a1, a2, a3);
-      case 5:
-        return function(param) {
-          return o(a0, a1, a2, a3, param);
-        };
-      case 6:
-        return function(param, param$1) {
-          return o(a0, a1, a2, a3, param, param$1);
-        };
-      case 7:
-        return function(param, param$1, param$2) {
-          return o(a0, a1, a2, a3, param, param$1, param$2);
-        };
-      default:
-        return app(o, [
-          a0,
-          a1,
-          a2,
-          a3
-        ]);
-    }
-  }
-}
-function __4(o) {
-  var arity = o.length;
-  if (arity === 4) {
-    return o;
-  } else {
-    return function(a0, a1, a2, a3) {
-      return _4(o, a0, a1, a2, a3);
-    };
-  }
-}
-function _5(o, a0, a1, a2, a3, a4) {
-  var arity = o.length;
-  if (arity === 5) {
-    return o(a0, a1, a2, a3, a4);
-  } else {
-    switch (arity) {
-      case 1:
-        return app(o(a0), [
-          a1,
-          a2,
-          a3,
-          a4
-        ]);
-      case 2:
-        return app(o(a0, a1), [
-          a2,
-          a3,
-          a4
-        ]);
-      case 3:
-        return app(o(a0, a1, a2), [
-          a3,
-          a4
-        ]);
-      case 4:
-        return app(o(a0, a1, a2, a3), [a4]);
-      case 5:
-        return o(a0, a1, a2, a3, a4);
-      case 6:
-        return function(param) {
-          return o(a0, a1, a2, a3, a4, param);
-        };
-      case 7:
-        return function(param, param$1) {
-          return o(a0, a1, a2, a3, a4, param, param$1);
-        };
-      default:
-        return app(o, [
-          a0,
-          a1,
-          a2,
-          a3,
-          a4
-        ]);
-    }
-  }
-}
-function __5(o) {
-  var arity = o.length;
-  if (arity === 5) {
-    return o;
-  } else {
-    return function(a0, a1, a2, a3, a4) {
-      return _5(o, a0, a1, a2, a3, a4);
-    };
-  }
-}
-function _6(o, a0, a1, a2, a3, a4, a5) {
-  var arity = o.length;
-  if (arity === 6) {
-    return o(a0, a1, a2, a3, a4, a5);
-  } else {
-    switch (arity) {
-      case 1:
-        return app(o(a0), [
-          a1,
-          a2,
-          a3,
-          a4,
-          a5
-        ]);
-      case 2:
-        return app(o(a0, a1), [
-          a2,
-          a3,
-          a4,
-          a5
-        ]);
-      case 3:
-        return app(o(a0, a1, a2), [
-          a3,
-          a4,
-          a5
-        ]);
-      case 4:
-        return app(o(a0, a1, a2, a3), [
-          a4,
-          a5
-        ]);
-      case 5:
-        return app(o(a0, a1, a2, a3, a4), [a5]);
-      case 6:
-        return o(a0, a1, a2, a3, a4, a5);
-      case 7:
-        return function(param) {
-          return o(a0, a1, a2, a3, a4, a5, param);
-        };
-      default:
-        return app(o, [
-          a0,
-          a1,
-          a2,
-          a3,
-          a4,
-          a5
-        ]);
-    }
-  }
-}
-function __6(o) {
-  var arity = o.length;
-  if (arity === 6) {
-    return o;
-  } else {
-    return function(a0, a1, a2, a3, a4, a5) {
-      return _6(o, a0, a1, a2, a3, a4, a5);
-    };
-  }
-}
-function _7(o, a0, a1, a2, a3, a4, a5, a6) {
-  var arity = o.length;
-  if (arity === 7) {
-    return o(a0, a1, a2, a3, a4, a5, a6);
-  } else {
-    switch (arity) {
-      case 1:
-        return app(o(a0), [
-          a1,
-          a2,
-          a3,
-          a4,
-          a5,
-          a6
-        ]);
-      case 2:
-        return app(o(a0, a1), [
-          a2,
-          a3,
-          a4,
-          a5,
-          a6
-        ]);
-      case 3:
-        return app(o(a0, a1, a2), [
-          a3,
-          a4,
-          a5,
-          a6
-        ]);
-      case 4:
-        return app(o(a0, a1, a2, a3), [
-          a4,
-          a5,
-          a6
-        ]);
-      case 5:
-        return app(o(a0, a1, a2, a3, a4), [
-          a5,
-          a6
-        ]);
-      case 6:
-        return app(o(a0, a1, a2, a3, a4, a5), [a6]);
-      case 7:
-        return o(a0, a1, a2, a3, a4, a5, a6);
-      default:
-        return app(o, [
-          a0,
-          a1,
-          a2,
-          a3,
-          a4,
-          a5,
-          a6
-        ]);
-    }
-  }
-}
-function __7(o) {
-  var arity = o.length;
-  if (arity === 7) {
-    return o;
-  } else {
-    return function(a0, a1, a2, a3, a4, a5, a6) {
-      return _7(o, a0, a1, a2, a3, a4, a5, a6);
-    };
-  }
-}
-function _8(o, a0, a1, a2, a3, a4, a5, a6, a7) {
-  var arity = o.length;
-  if (arity === 8) {
-    return o(a0, a1, a2, a3, a4, a5, a6, a7);
-  } else {
-    switch (arity) {
-      case 1:
-        return app(o(a0), [
-          a1,
-          a2,
-          a3,
-          a4,
-          a5,
-          a6,
-          a7
-        ]);
-      case 2:
-        return app(o(a0, a1), [
-          a2,
-          a3,
-          a4,
-          a5,
-          a6,
-          a7
-        ]);
-      case 3:
-        return app(o(a0, a1, a2), [
-          a3,
-          a4,
-          a5,
-          a6,
-          a7
-        ]);
-      case 4:
-        return app(o(a0, a1, a2, a3), [
-          a4,
-          a5,
-          a6,
-          a7
-        ]);
-      case 5:
-        return app(o(a0, a1, a2, a3, a4), [
-          a5,
-          a6,
-          a7
-        ]);
-      case 6:
-        return app(o(a0, a1, a2, a3, a4, a5), [
-          a6,
-          a7
-        ]);
-      case 7:
-        return app(o(a0, a1, a2, a3, a4, a5, a6), [a7]);
-      default:
-        return app(o, [
-          a0,
-          a1,
-          a2,
-          a3,
-          a4,
-          a5,
-          a6,
-          a7
-        ]);
-    }
-  }
-}
-function __8(o) {
-  var arity = o.length;
-  if (arity === 8) {
-    return o;
-  } else {
-    return function(a0, a1, a2, a3, a4, a5, a6, a7) {
-      return _8(o, a0, a1, a2, a3, a4, a5, a6, a7);
-    };
-  }
-}
 
-// src/Reconciler.bs.js
-var Reconciler_bs_exports = {};
-__export(Reconciler_bs_exports, {
-  $$Map: () => $$Map,
-  $$Set: () => $$Set,
-  RenderDelegate: () => RenderDelegate,
-  mount: () => mount,
-  renderWithDelegate: () => renderWithDelegate,
-  visit: () => visit
-});
-
-// src/NodeRepr.bs.js
-var NodeRepr_bs_exports = {};
-__export(NodeRepr_bs_exports, {
-  create: () => create,
-  isNode: () => isNode,
-  shallowCopy: () => shallowCopy,
-  symbol: () => symbol
-});
-
-// node_modules/rescript/lib/es6/js_types.js
-function classify(x) {
-  var ty = typeof x;
-  if (ty === "undefined") {
-    return 3;
-  } else if (x === null) {
-    return 2;
-  } else if (ty === "number") {
-    return {
-      TAG: 0,
-      _0: x
-    };
-  } else if (ty === "bigint") {
-    return {
-      TAG: 5,
-      _0: x
-    };
-  } else if (ty === "string") {
-    return {
-      TAG: 1,
-      _0: x
-    };
-  } else if (ty === "boolean") {
-    if (x === true) {
-      return 1;
-    } else {
-      return 0;
-    }
-  } else if (ty === "symbol") {
-    return {
-      TAG: 4,
-      _0: x
-    };
-  } else if (ty === "function") {
-    return {
-      TAG: 2,
-      _0: x
-    };
-  } else {
-    return {
-      TAG: 3,
-      _0: x
-    };
-  }
-}
-function test(x, v) {
-  switch (v) {
-    case 0:
-      return typeof x === "undefined";
-    case 1:
-      return x === null;
-    case 2:
-      return typeof x === "boolean";
-    case 3:
-      return typeof x === "number";
-    case 4:
-      return typeof x === "string";
-    case 5:
-      return typeof x === "function";
-    case 6:
-      return typeof x === "object";
-    case 7:
-      return typeof x === "symbol";
-    case 8:
-      return typeof x === "bigint";
-  }
-}
-
-// node_modules/rescript/lib/es6/caml_option.js
+// ../../node_modules/rescript/lib/es6/caml_option.js
 function some(x) {
   if (x === void 0) {
     return {
@@ -704,7 +302,7 @@ function valFromOption(x) {
   }
 }
 
-// node_modules/rescript/lib/es6/belt_List.js
+// ../../node_modules/rescript/lib/es6/belt_List.js
 function copyAuxCont(_cellX, _prec) {
   while (true) {
     var prec = _prec;
@@ -714,7 +312,10 @@ function copyAuxCont(_cellX, _prec) {
     }
     var next = {
       hd: cellX.hd,
-      tl: 0
+      tl: (
+        /* [] */
+        0
+      )
     };
     prec.tl = next;
     _prec = next;
@@ -732,7 +333,10 @@ function copyAuxWithMap(_cellX, _prec, f) {
     }
     var next = {
       hd: f(cellX.hd),
-      tl: 0
+      tl: (
+        /* [] */
+        0
+      )
     };
     prec.tl = next;
     _prec = next;
@@ -751,7 +355,10 @@ function copyAuxWithMapI(f, _i, _cellX, _prec) {
     }
     var next = {
       hd: f(i, cellX.hd),
-      tl: 0
+      tl: (
+        /* [] */
+        0
+      )
     };
     prec.tl = next;
     _prec = next;
@@ -767,18 +374,27 @@ function concat(xs, ys) {
   }
   var cell = {
     hd: xs.hd,
-    tl: 0
+    tl: (
+      /* [] */
+      0
+    )
   };
   copyAuxCont(xs.tl, cell).tl = ys;
   return cell;
 }
 function mapU(xs, f) {
   if (!xs) {
-    return 0;
+    return (
+      /* [] */
+      0
+    );
   }
   var cell = {
     hd: f(xs.hd),
-    tl: 0
+    tl: (
+      /* [] */
+      0
+    )
   };
   copyAuxWithMap(xs.tl, cell, f);
   return cell;
@@ -788,11 +404,17 @@ function map(xs, f) {
 }
 function mapWithIndexU(xs, f) {
   if (!xs) {
-    return 0;
+    return (
+      /* [] */
+      0
+    );
   }
   var cell = {
     hd: f(0, xs.hd),
-    tl: 0
+    tl: (
+      /* [] */
+      0
+    )
   };
   copyAuxWithMapI(f, 1, xs.tl, cell);
   return cell;
@@ -831,7 +453,10 @@ function fillAux(arr, _i, _x) {
 }
 function fromArray(a) {
   var _i = a.length - 1 | 0;
-  var _res = 0;
+  var _res = (
+    /* [] */
+    0
+  );
   while (true) {
     var res = _res;
     var i = _i;
@@ -901,14 +526,14 @@ function updateNodeProps(renderer, hash, prevProps, nextProps) {
   }
 }
 
-// node_modules/rescript/lib/es6/js_dict.js
+// ../../node_modules/rescript/lib/es6/js_dict.js
 function get(dict, k) {
   if (k in dict) {
     return some(dict[k]);
   }
 }
 
-// node_modules/rescript/lib/es6/js_option.js
+// ../../node_modules/rescript/lib/es6/js_option.js
 function getExn(x) {
   if (x !== void 0) {
     return valFromOption(x);
@@ -933,7 +558,7 @@ function hashString(seed, s) {
 function hashNode(kind, props, children) {
   var r = hashString(-2128831035, kind);
   var k = get(props, "key");
-  var r2 = k !== void 0 && test(k, 4) ? hashString(r, k) : hashString(r, getExn(JSON.stringify(props)));
+  var r2 = k !== void 0 && test(k, "String") ? hashString(r, k) : hashString(r, getExn(JSON.stringify(props)));
   return reduceU(children, r2, mixNumber) & 2147483647;
 }
 
@@ -943,9 +568,9 @@ function create(kind, props, children) {
   var childrenList = fromArray(children);
   return {
     symbol,
-    hash: hashNode(kind, props, map(childrenList, function(n) {
+    hash: hashNode(kind, props, map(childrenList, (function(n) {
       return mixNumber(n.hash, n.outputChannel);
-    })),
+    }))),
     kind,
     props,
     outputChannel: 0,
@@ -954,14 +579,14 @@ function create(kind, props, children) {
 }
 function isNode(a) {
   var match = classify(a);
-  if (typeof match === "number") {
+  if (typeof match !== "object") {
     return false;
   }
-  if (match.TAG !== 3) {
+  if (match.TAG !== "JSObject") {
     return false;
   }
   var s = classify(a.symbol);
-  if (typeof s === "number" || s.TAG !== 1) {
+  if (typeof s !== "object" || s.TAG !== "JSString") {
     return false;
   } else {
     return s._0 === symbol;
@@ -981,14 +606,6 @@ function shallowCopy(node) {
 }
 
 // src/Reconciler.bs.js
-function valuesArray(m) {
-  return Array.from(m.values());
-}
-var $$Map = {
-  valuesArray
-};
-var $$Set = {};
-var RenderDelegate = {};
 function mount(delegate, node) {
   var nodeMap = delegate.getNodeMap();
   if (nodeMap.has(node.hash)) {
@@ -997,9 +614,9 @@ function mount(delegate, node) {
   }
   delegate.createNode(node.hash, node.kind);
   updateNodeProps2(delegate, node.hash, {}, node.props);
-  forEach(node.children, function(child) {
+  forEach(node.children, (function(child) {
     delegate.appendChild(node.hash, child.hash, child.outputChannel);
-  });
+  }));
   nodeMap.set(node.hash, shallowCopy(node));
 }
 function visit(delegate, visitSet, _ns) {
@@ -1026,37 +643,26 @@ function visit(delegate, visitSet, _ns) {
 }
 function renderWithDelegate(delegate, graphs, rootFadeInMs, rootFadeOutMs) {
   var visitSet = /* @__PURE__ */ new Set();
-  var roots = mapWithIndex(fromArray(graphs), function(i, g) {
+  var roots = mapWithIndex(fromArray(graphs), (function(i, g) {
     return create("root", {
       channel: i,
       fadeInMs: rootFadeInMs,
       fadeOutMs: rootFadeOutMs
     }, [g]);
-  });
+  }));
   visit(delegate, visitSet, roots);
-  delegate.activateRoots(toArray(map(roots, function(r) {
+  delegate.activateRoots(toArray(map(roots, (function(r) {
     return r.hash;
-  })));
+  }))));
   delegate.commitUpdates();
 }
 
 // src/Reconciler.gen.ts
-var Curry = curry_exports;
-var ReconcilerBS = Reconciler_bs_exports;
-var renderWithDelegate2 = function(Arg1, Arg2, Arg3, Arg4) {
-  const result = Curry._4(ReconcilerBS.renderWithDelegate, Arg1, Arg2, Arg3, Arg4);
-  return result;
-};
+var renderWithDelegate2 = renderWithDelegate;
 
 // src/NodeRepr.gen.ts
-var Curry2 = curry_exports;
-var NodeReprBS = NodeRepr_bs_exports;
-var create2 = function(Arg1, Arg2, Arg3) {
-  const result = Curry2._3(NodeReprBS.create, Arg1, Arg2, Arg3);
-  return result;
-};
-var isNode2 = NodeReprBS.isNode;
-var shallowCopy2 = NodeReprBS.shallowCopy;
+var create2 = create;
+var isNode2 = isNode;
 
 // nodeUtils.ts
 var import_invariant = __toESM(require("invariant"), 1);
@@ -1421,7 +1027,11 @@ function hann(t) {
 // lib/dynamics.ts
 var el2 = __spreadValues(__spreadValues(__spreadValues({}, core_exports), math_exports), signals_exports);
 function compress(attackMs, releaseMs, threshold, ratio, sidechain, xn) {
-  const env2 = el2.env(el2.tau2pole(el2.mul(1e-3, attackMs)), el2.tau2pole(el2.mul(1e-3, releaseMs)), sidechain);
+  const env2 = el2.env(
+    el2.tau2pole(el2.mul(1e-3, attackMs)),
+    el2.tau2pole(el2.mul(1e-3, releaseMs)),
+    sidechain
+  );
   const envDecibels = el2.gain2db(env2);
   const adjustedRatio = el2.sub(1, el2.div(1, ratio));
   const gain = el2.mul(adjustedRatio, el2.sub(threshold, envDecibels));
@@ -1430,13 +1040,32 @@ function compress(attackMs, releaseMs, threshold, ratio, sidechain, xn) {
   return el2.mul(xn, compressedGain);
 }
 function skcompress(attackMs, releaseMs, threshold, ratio, kneeWidth, sidechain, xn) {
-  const env2 = el2.env(el2.tau2pole(el2.mul(1e-3, attackMs)), el2.tau2pole(el2.mul(1e-3, releaseMs)), sidechain);
+  const env2 = el2.env(
+    el2.tau2pole(el2.mul(1e-3, attackMs)),
+    el2.tau2pole(el2.mul(1e-3, releaseMs)),
+    sidechain
+  );
   const envDecibels = el2.gain2db(env2);
   const lowerKneeBound = el2.sub(threshold, el2.div(kneeWidth, 2));
   const upperKneeBound = el2.add(threshold, el2.div(kneeWidth, 2));
-  const isInSoftKneeRange = el2.and(el2.geq(envDecibels, lowerKneeBound), el2.leq(envDecibels, upperKneeBound));
+  const isInSoftKneeRange = el2.and(
+    el2.geq(envDecibels, lowerKneeBound),
+    // envDecibels >= lowerKneeBound
+    el2.leq(envDecibels, upperKneeBound)
+    // envDecibels <= upperKneeBound
+  );
   const adjustedRatio = el2.sub(1, el2.div(1, ratio));
-  const gain = el2.select(isInSoftKneeRange, el2.mul(el2.div(adjustedRatio, 2), el2.mul(el2.div(el2.sub(envDecibels, lowerKneeBound), kneeWidth), el2.sub(lowerKneeBound, envDecibels))), el2.mul(adjustedRatio, el2.sub(threshold, envDecibels)));
+  const gain = el2.select(
+    isInSoftKneeRange,
+    el2.mul(
+      el2.div(adjustedRatio, 2),
+      el2.mul(
+        el2.div(el2.sub(envDecibels, lowerKneeBound), kneeWidth),
+        el2.sub(lowerKneeBound, envDecibels)
+      )
+    ),
+    el2.mul(adjustedRatio, el2.sub(threshold, envDecibels))
+  );
   const cleanGain = el2.min(0, gain);
   const compressedGain = el2.db2gain(cleanGain);
   return el2.mul(xn, compressedGain);
@@ -1508,7 +1137,19 @@ function highshelf(fc, q, gainDecibels, x) {
 }
 function pink(x) {
   let clip = (min3, max3, x2) => el3.min(max3, el3.max(min3, x2));
-  return clip(-1, 1, el3.mul(el3.db2gain(-30), el3.add(el3.pole(0.99765, el3.mul(x, 0.099046)), el3.pole(0.963, el3.mul(x, 0.2965164)), el3.pole(0.57, el3.mul(x, 1.0526913)), el3.mul(0.1848, x))));
+  return clip(
+    -1,
+    1,
+    el3.mul(
+      el3.db2gain(-30),
+      el3.add(
+        el3.pole(0.99765, el3.mul(x, 0.099046)),
+        el3.pole(0.963, el3.mul(x, 0.2965164)),
+        el3.pole(0.57, el3.mul(x, 1.0526913)),
+        el3.mul(0.1848, x)
+      )
+    )
+  );
 }
 
 // lib/envelopes.ts
@@ -1535,28 +1176,46 @@ __export(mc_exports, {
 var import_invariant2 = __toESM(require("invariant"), 1);
 function sample2(props, gate) {
   let _a = props, { channels } = _a, other = __objRest(_a, ["channels"]);
-  (0, import_invariant2.default)(typeof channels === "number" && channels > 0, "Must provide a positive number channels prop");
+  (0, import_invariant2.default)(
+    typeof channels === "number" && channels > 0,
+    "Must provide a positive number channels prop"
+  );
   return unpack(createNode("mc.sample", other, [resolve(gate)]), channels);
 }
 function sampleseq3(props, time2) {
   let _a = props, { channels } = _a, other = __objRest(_a, ["channels"]);
-  (0, import_invariant2.default)(typeof channels === "number" && channels > 0, "Must provide a positive number channels prop");
+  (0, import_invariant2.default)(
+    typeof channels === "number" && channels > 0,
+    "Must provide a positive number channels prop"
+  );
   return unpack(createNode("mc.sampleseq", other, [resolve(time2)]), channels);
 }
 function sampleseq22(props, time2) {
   let _a = props, { channels } = _a, other = __objRest(_a, ["channels"]);
-  (0, import_invariant2.default)(typeof channels === "number" && channels > 0, "Must provide a positive number channels prop");
+  (0, import_invariant2.default)(
+    typeof channels === "number" && channels > 0,
+    "Must provide a positive number channels prop"
+  );
   return unpack(createNode("mc.sampleseq2", other, [resolve(time2)]), channels);
 }
 function table2(props, t) {
   let _a = props, { channels } = _a, other = __objRest(_a, ["channels"]);
-  (0, import_invariant2.default)(typeof channels === "number" && channels > 0, "Must provide a positive number channels prop");
+  (0, import_invariant2.default)(
+    typeof channels === "number" && channels > 0,
+    "Must provide a positive number channels prop"
+  );
   return unpack(createNode("mc.table", other, [resolve(t)]), channels);
 }
 function capture2(props, g, ...args) {
   let _a = props, { channels } = _a, other = __objRest(_a, ["channels"]);
-  (0, import_invariant2.default)(typeof channels === "number" && channels > 0, "Must provide a positive number channels prop");
-  return unpack(createNode("mc.capture", other, [resolve(g), ...args.map(resolve)]), channels);
+  (0, import_invariant2.default)(
+    typeof channels === "number" && channels > 0,
+    "Must provide a positive number channels prop"
+  );
+  return unpack(
+    createNode("mc.capture", other, [resolve(g), ...args.map(resolve)]),
+    channels
+  );
 }
 
 // lib/oscillators.ts
@@ -1616,6 +1275,7 @@ var Events_default = class extends import_eventemitter3.default {
 // index.ts
 var stdlib = __spreadProps(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, core_exports), dynamics_exports), envelopes_exports), filters_exports), math_exports), oscillators_exports), signals_exports), {
   mc: mc_exports,
+  // Aliases for reserved keyword conflicts
   "const": constant,
   "in": identity
 });
@@ -1692,6 +1352,22 @@ var Renderer = class {
     this._sendMessage = sendMessage;
     this._nextRefId = 0;
   }
+  // A method for creating "refs," which looks the same as the function for creating
+  // nodes but captures the context of the Renderer instance to provide scoped property
+  // updates to the ref without incurring a full graph construction and reconciliation pass.
+  //
+  // Example:
+  //  let [cutoffFreq, setCutoffFreq] = createRef("const", {value: 440}, []);
+  //
+  //  // Render a ref just the same as you would any other node
+  //  core.render(el.lowpass(cutoffFreq, 1, el.in({channel: 0})));
+  //
+  //  // Subsequent property changes can be made through the property setter returned
+  //  // from the call to createRef
+  //  setCutoffFreq({ value: 440 });
+  //
+  // Note: refs should only be rendered by the Renderer instance from which they were created.
+  // In other words, don't share refs between different renderer instances.
   createRef(kind, props, children) {
     let key = `__refKey:${this._nextRefId++}`;
     let node = createNode(kind, Object.assign({ key }, props), children);

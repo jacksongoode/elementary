@@ -61,11 +61,11 @@ var __async = (__this, __arguments, generator) => {
 };
 
 // index.ts
-var web_renderer_exports = {};
-__export(web_renderer_exports, {
+var index_exports = {};
+__export(index_exports, {
   default: () => WebRenderer
 });
-module.exports = __toCommonJS(web_renderer_exports);
+module.exports = __toCommonJS(index_exports);
 var import_invariant = __toESM(require("invariant"), 1);
 var import_core = require("@elemaudio/core");
 

@@ -29,12 +29,12 @@ function hashString(seed, s) {
 function hashNode(kind, props, children) {
   var r = hashString(-2128831035, kind);
   var k = Js_dict.get(props, "key");
-  var r2 = k !== undefined && Js_types.test(k, /* String */4) ? hashString(r, k) : hashString(r, Js_option.getExn(JSON.stringify(props)));
+  var r2 = k !== undefined && Js_types.test(k, "String") ? hashString(r, k) : hashString(r, Js_option.getExn(JSON.stringify(props)));
   return Belt_List.reduceU(children, r2, mixNumber) & 2147483647;
 }
 
 function hashMemoInputs(props, children) {
-  var r = Js_types.test(props.memoKey, /* String */4) ? hashString(-2128831035, props.memoKey) : hashString(-2128831035, Js_option.getExn(JSON.stringify(props)));
+  var r = Js_types.test(props.memoKey, "String") ? hashString(-2128831035, props.memoKey) : hashString(-2128831035, Js_option.getExn(JSON.stringify(props)));
   return Belt_List.reduceU(children, r, mixNumber) & 2147483647;
 }
 

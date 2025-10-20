@@ -29,7 +29,7 @@
   },
   "scripts": {
     "wasm": "./scripts/prebuild.sh",
-    "build": "tsup index.ts --format cjs,esm --dts",
+    "build": "tsup index.ts --format cjs,esm",
     "snaps": "jest --updateSnapshot",
     "test": "jest"
   },

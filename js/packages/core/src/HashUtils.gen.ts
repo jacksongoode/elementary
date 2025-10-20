@@ -1,17 +1,14 @@
 /* TypeScript file generated from HashUtils.res by genType. */
-/* eslint-disable import/first */
 
+/* eslint-disable */
+/* tslint:disable */
 
-// @ts-ignore: Implicit any on import
-import * as HashUtilsBS__Es6Import from './HashUtils.bs';
-const HashUtilsBS: any = HashUtilsBS__Es6Import;
-
-import type {Dict_t as Js_Dict_t} from './Js.gen';
+import * as HashUtilsJS from './HashUtils.bs.js';
 
 import type {list} from '../src/shims/RescriptPervasives.shim';
 
-export const hashString: (_1:number, _2:string) => number = HashUtilsBS.hashString;
+export const hashString: (seed:number, s:string) => number = HashUtilsJS.hashString as any;
 
-export const hashNode: (_1:string, _2:Js_Dict_t<string>, _3:list<number>) => number = HashUtilsBS.hashNode;
+export const hashNode: (kind:string, props:{[id: string]: string}, children:list<number>) => number = HashUtilsJS.hashNode as any;
 
-export const hashMemoInputs: (_1:{ readonly memoKey: string }, _2:list<number>) => number = HashUtilsBS.hashMemoInputs;
+export const hashMemoInputs: (props:{ readonly memoKey: string }, children:list<number>) => number = HashUtilsJS.hashMemoInputs as any;
