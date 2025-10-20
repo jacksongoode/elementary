@@ -87,6 +87,10 @@ namespace elem
             callback("min",             GenericNodeFactory<BinaryReducingNode<FloatType, Min<FloatType>>>());
             callback("max",             GenericNodeFactory<BinaryReducingNode<FloatType, Max<FloatType>>>());
 
+            callback("adsr",            GenericNodeFactory<ADSRNode<FloatType>>());
+            callback("smooth",          GenericNodeFactory<SmoothNode<FloatType>>());
+            callback("sm",              GenericNodeFactory<SmoothNode<FloatType>>());
+
             // Core nodes
             callback("root",            GenericNodeFactory<RootNode<FloatType>>());
             callback("const",           GenericNodeFactory<ConstNode<FloatType>>());
@@ -134,6 +138,10 @@ namespace elem
             // callback("mc.table",        GenericNodeFactory<StereoTableNode<FloatType>>());
 
             // Oscillator nodes
+            callback("cycle",           GenericNodeFactory<CycleNode<FloatType>>());
+
+            // Noise nodes
+            callback("noise",           GenericNodeFactory<NoiseNode<FloatType>>());
             // callback("blepsaw",         GenericNodeFactory<PolyBlepOscillatorNode<FloatType, detail::BlepMode::Saw>>());
             // callback("blepsquare",      GenericNodeFactory<PolyBlepOscillatorNode<FloatType, detail::BlepMode::Square>>());
             // callback("bleptriangle",    GenericNodeFactory<PolyBlepOscillatorNode<FloatType, detail::BlepMode::Triangle>>());
