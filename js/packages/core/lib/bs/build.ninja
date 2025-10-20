@@ -1,0 +1,19 @@
+rescript = 1
+rule astj
+  command = /Users/jackson/GitHub/jackson.gd/elementary/js/node_modules/rescript/darwinarm64/bsc.exe  -bs-v 11.1.4 -uncurried  -absname -bs-ast -o $out $i
+o src/NodeRepr.ast : astj ../../src/NodeRepr.res
+rule deps
+  command = /Users/jackson/GitHub/jackson.gd/elementary/js/node_modules/rescript/darwinarm64/bsb_helper.exe -hash a89cedf3b30a8584e99787ebe2410619 $in
+  restat = 1
+o src/NodeRepr.d : deps src/NodeRepr.ast
+rule mij
+  command = /Users/jackson/GitHub/jackson.gd/elementary/js/node_modules/rescript/darwinarm64/bsc.exe -I src/shims -I src   -bs-gentype -uncurried -bs-package-name elementary-core -bs-package-output esmodule:$in_d:.bs.js $i
+  dyndep = 1
+  restat = 1
+o src/NodeRepr.cmj src/NodeRepr.cmi ../../src/NodeRepr.bs.js : mij src/NodeRepr.ast
+o src/HashUtils.ast : astj ../../src/HashUtils.res
+o src/HashUtils.d : deps src/HashUtils.ast
+o src/HashUtils.cmj src/HashUtils.cmi ../../src/HashUtils.bs.js : mij src/HashUtils.ast
+o src/Reconciler.ast : astj ../../src/Reconciler.res
+o src/Reconciler.d : deps src/Reconciler.ast
+o src/Reconciler.cmj src/Reconciler.cmi ../../src/Reconciler.bs.js : mij src/Reconciler.ast

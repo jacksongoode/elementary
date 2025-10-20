@@ -1,0 +1,18 @@
+rescript = 1
+rule cp
+  command = cp $i $out
+rule touch
+ command = touch $out
+o NodeRepr.cmi : cp ../bs/src/NodeRepr.cmi
+o NodeRepr.cmj : cp ../bs/src/NodeRepr.cmj
+o NodeRepr.cmt : cp ../bs/src/NodeRepr.cmt
+o NodeRepr.res : cp ../../src/NodeRepr.res
+o HashUtils.cmi : cp ../bs/src/HashUtils.cmi
+o HashUtils.cmj : cp ../bs/src/HashUtils.cmj
+o HashUtils.cmt : cp ../bs/src/HashUtils.cmt
+o HashUtils.res : cp ../../src/HashUtils.res
+o Reconciler.cmi : cp ../bs/src/Reconciler.cmi
+o Reconciler.cmj : cp ../bs/src/Reconciler.cmj
+o Reconciler.cmt : cp ../bs/src/Reconciler.cmt
+o Reconciler.res : cp ../../src/Reconciler.res
+build install.stamp : touch NodeRepr.cmi NodeRepr.cmj HashUtils.cmi HashUtils.cmj Reconciler.cmi Reconciler.cmj 
