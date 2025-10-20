@@ -2,5 +2,14 @@
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "ignoreChanges": [
+    "**/dist/**",
+    "**/package-lock.json",
+    "**/*.bs.js",
+    "**/*.gen.ts",
+    "**/*.cjs",
+    "**/*.cjs.map",
+    "**/*.js.map"
+  ]
 }
